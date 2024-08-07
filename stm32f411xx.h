@@ -34,16 +34,16 @@
 /***********************************************************
  *                   Base Address Defines
  ***********************************************************/
-/*
- * Base addresses of FLASH and SRAM
+/**
+ * @brief Base addresses of FLASH and SRAM
  */
 #define FLASH_BASEADDR          0x08000000U /*!<base address of main flash */
 #define ROM_BASEADDR            0x1FFF0000U
 #define SRAM1_BASEADDR          0x20000000U
 #define SRAM                    SRAM_BASEADDR
 
-/*
- * Base addresses of bus domains
+/**
+ * @brief Base addresses of bus domains
  */
 #define PERIPH_BASEADDR         0x40000000U
 #define APB1PERIPH_BASEADDR     PERIPH_BASEADDR
@@ -51,9 +51,9 @@
 #define AHB1PERIPH_BASEADDR     0x40020000U
 #define AHB2PERIPH_BASEADDR     0x50000000U
 
-/*
- * Base addresses of peripherals attached to AHB1 bus
- * TODO: Complete for all other peripherals and busses
+/**
+ * @brief Base addresses of peripherals attached to AHB1 bus
+ * @todo TODO: Complete for all other peripherals and busses
  */
 #define GPIOA_BASEADDR          (AHB1PERIPH_BASEADDR + 0x0000)
 #define GPIOB_BASEADDR          (AHB1PERIPH_BASEADDR + 0x0400)
@@ -65,8 +65,8 @@
 #define RCC_BASEADDR            (AHB1PERIPH_BASEADDR + 0x3800)
 
 
-/*
- * Base addresses of peripherals attached to APB1 bus
+/**
+ * @brief Base addresses of peripherals attached to APB1 bus
  * TODO: Complete for all other peripherals and busses
  */
 #define I2C1_BASEADDR           (APB1PERIPH_BASEADDR + 0x5400)
@@ -77,8 +77,8 @@
 #define USART2_BASEADDR         (APB1PERIPH_BASEADDR + 0x4400)
 
 
-/*
- * Base addresses of peripherals attached to APB2 bus
+/**
+ * @brief Base addresses of peripherals attached to APB2 bus
  * TODO: Complete for all other peripherals and busses
  */
 #define EXTI_BASEADDR           (APB2PERIPH_BASEADDR + 0x3C00)
@@ -92,7 +92,7 @@
 
 
 /***********************************************************
- *   ARM Cortex-Mx Processor NVIC ISERx Register Addresses
+ * @brief ARM Cortex-Mx Processor NVIC ISERx Register Addresses
  ***********************************************************/
 #define NVIC_ISER0              ((__IO uint32_t *)0xE000E100)
 #define NVIC_ISER1              ((__IO uint32_t *)0xE000E104)
@@ -102,7 +102,7 @@
 
 
 /***********************************************************
- *   ARM Cortex-Mx Processor NVIC ICERx Register Addresses
+ * @brief ARM Cortex-Mx Processor NVIC ICERx Register Addresses
  ***********************************************************/
 #define NVIC_ICER0              ((__IO uint32_t *)0xE000E180)
 #define NVIC_ICER1              ((__IO uint32_t *)0xE000E184)
@@ -112,20 +112,24 @@
 
 
 /***********************************************************
- *   ARM Cortex-Mx Processor NVIC IPRx Register Addresses
+ * @brief ARM Cortex-Mx Processor NVIC IPRx Register Addresses
  ***********************************************************/
-
 #define NVIC_PRI_BASEADDR       ((__IO uint32_t *)0xE000E400)
 
+/**
+ * @brief Number of bits used for Priority Levels in STM32
+ * This is different from TI Tiva which uses 8 bits of
+ * priority levels
+ */
 #define NO_BITS_IMPLEMENTED     4
 
 
 
 /***********************************************************
- *                   RCC
+ * @brief            RCC
  ***********************************************************/
-/*
- * Peripheral register definition structure for RCC
+/**
+ * @brief Peripheral register definition structure for RCC
  */
 typedef struct
 {
@@ -161,8 +165,8 @@ typedef struct
 } RCC_RegDef_t;
 
 
-/*
- * RCC Definition (Peripheral base addresses type casted to xxxRegDef_t)
+/**
+ * @brief RCC Definition (Peripheral base addresses type casted to xxxRegDef_t)
  */
 #define RCC                     ((RCC_RegDef_t *)RCC_BASEADDR)
 
@@ -171,8 +175,8 @@ typedef struct
 /***********************************************************
  *                   GPIO
  ***********************************************************/
-/*
- * Peripheral register definition structure for GPIO
+/**
+ * @brief Peripheral register definition structure for GPIO
  */
 typedef struct
 {
@@ -189,8 +193,8 @@ typedef struct
 } GPIO_RegDef_t;
 
 
-/*
- * GPIOx Definitions (Peripheral base addresses type casted to xxxRegDef_t)
+/**
+ * @brief GPIOx Definitions (Peripheral base addresses type casted to xxxRegDef_t)
  */
 #define GPIOA                   ((GPIO_RegDef_t *)GPIOA_BASEADDR)
 #define GPIOB                   ((GPIO_RegDef_t *)GPIOB_BASEADDR)
@@ -200,8 +204,8 @@ typedef struct
 #define GPIOH                   ((GPIO_RegDef_t *)GPIOH_BASEADDR)
 
 
-/*
- * GPIOx peripheral reset
+/**
+ * @brief GPIOx peripheral reset
  */
 #define GPIOA_REG_RESET()       do{ (RCC->AHB1ENR |= (1 << 0)); (RCC->AHB1ENR &= ~(1 << 0)); }while(0)
 #define GPIOB_REG_RESET()       do{ (RCC->AHB1ENR |= (1 << 1)); (RCC->AHB1ENR &= ~(1 << 1)); }while(0)
@@ -215,8 +219,8 @@ typedef struct
 /***********************************************************
  *                   EXTI
  ***********************************************************/
-/*
- * Peripheral register definition structure for EXTI
+/**
+ * @brief Peripheral register definition structure for EXTI
  */
 typedef struct
 {
@@ -229,8 +233,8 @@ typedef struct
 } EXTI_RegDef_t;
 
 
-/*
- * EXTI Definition (Peripheral base addresses type casted to xxxRegDef_t)
+/**
+ * @brief EXTI Definition (Peripheral base addresses type casted to xxxRegDef_t)
  */
 #define EXTI                    ((EXTI_RegDef_t *)EXTI_BASEADDR)
 
@@ -241,15 +245,15 @@ typedef struct
 /***********************************************************
  *                   NVIC
  ***********************************************************/
-/*
- * NVIC IRQ numbers
+/**
+ * @brief NVIC IRQ numbers
  */
 typedef enum
 {
 	/******  Cortex-M4 Specific Exceptions Numbers ************************************************************/
-	NonMaskableInt_IRQn       = -14,    /*!< 2 Non Maskable Interrupt                                         */
+	NonMaskableInt_IRQn       = -14,    /*!< 2 Non Maskable Interrupt                                       > */
 	MemoryManagement_IRQn     = -12,    /*!< 4 Cortex-M4 Memory Management Interrupt                          */
-    BusFault_IRQn             = -11,    /*!< 5 Cortex-M4 Bus Fault Interrupt                                  */
+        BusFault_IRQn             = -11,    /*!< 5 Cortex-M4 Bus Fault Interrupt                                  */
 	UsageFault_IRQn           = -10,    /*!< 6 Cortex-M4 Usage Fault Interrupt                                */
 	SVCall_IRQn               = -5,     /*!< 11 Cortex-M4 SV Call Interrupt                                   */
 	DebugMonitor_IRQn         = -4,     /*!< 12 Cortex-M4 Debug Monitor Interrupt                             */
@@ -262,7 +266,7 @@ typedef enum
 	RTC_WKUP_IRQn              = 3,    /*!< RTC Wake up interrupt through the EXTI line                       */
 	FLASH_IRQn                 = 4,    /*!< FLASH global Interrupt                                            */
 	RCC_IRQn                   = 5,    /*!< RCC global Interrupt                                              */
-    EXTI0_IRQn                 = 6,    /*!< EXTI Line0 Interrupt                                              */
+        EXTI0_IRQn                 = 6,    /*!< EXTI Line0 Interrupt                                              */
 	EXTI1_IRQn                 = 7,    /*!< EXTI Line1 Interrupt                                              */
 	EXTI2_IRQn                 = 8,    /*!< EXTI Line2 Interrupt                                              */
 	EXTI3_IRQn                 = 9,    /*!< EXTI Line3 Interrupt                                              */
@@ -285,39 +289,39 @@ typedef enum
 	TIM4_IRQn                  = 30,   /*!< TIM4 global Interrupt                                             */
 	I2C1_EV_IRQn               = 31,   /*!< I2C1 Event Interrupt                                              */
 	I2C1_ER_IRQn               = 32,   /*!< I2C1 Error Interrupt                                              */
-    I2C2_EV_IRQn               = 33,   /*!< I2C2 Event Interrupt                                              */
+        I2C2_EV_IRQn               = 33,   /*!< I2C2 Event Interrupt                                              */
 	I2C2_ER_IRQn               = 34,   /*!< I2C2 Error Interrupt                                              */
 	SPI1_IRQn                  = 35,   /*!< SPI1 global Interrupt                                             */
 	SPI2_IRQn                  = 36,   /*!< SPI2 global Interrupt                                             */
 	USART1_IRQn                = 37,   /*!< USART1 global Interrupt                                           */
 	USART2_IRQn                = 38,   /*!< USART2 global Interrupt                                           */
 	EXTI15_10_IRQn             = 40,   /*!< External Line[15:10] Interrupts                                   */
-	RTC_Alarm_IRQn             = 41,     /*!< RTC Alarm (A and B) through EXTI Line Interrupt                 */
-	OTG_FS_WKUP_IRQn           = 42,     /*!< USB OTG FS Wakeup through EXTI line interrupt                   */
-	DMA1_Stream7_IRQn          = 47,     /*!< DMA1 Stream7 Interrupt                                          */
-	SDIO_IRQn                  = 49,     /*!< SDIO global Interrupt                                           */
-	TIM5_IRQn                  = 50,     /*!< TIM5 global Interrupt                                           */
+	RTC_Alarm_IRQn             = 41,   /*!< RTC Alarm (A and B) through EXTI Line Interrupt                   */
+	OTG_FS_WKUP_IRQn           = 42,   /*!< USB OTG FS Wakeup through EXTI line interrupt                     */
+	DMA1_Stream7_IRQn          = 47,   /*!< DMA1 Stream7 Interrupt                                            */
+	SDIO_IRQn                  = 49,   /*!< SDIO global Interrupt                                             */
+	TIM5_IRQn                  = 50,   /*!< TIM5 global Interrupt                                             */
 	SPI3_IRQn                  = 51,   /*!< SPI3 global Interrupt                                             */
-	DMA2_Stream0_IRQn          = 56,     /*!< DMA2 Stream 0 global Interrupt                                  */
-	DMA2_Stream1_IRQn          = 57,     /*!< DMA2 Stream 1 global Interrupt                                  */
-	DMA2_Stream2_IRQn          = 58,     /*!< DMA2 Stream 2 global Interrupt                                  */
-	DMA2_Stream3_IRQn          = 59,     /*!< DMA2 Stream 3 global Interrupt                                  */
-	DMA2_Stream4_IRQn          = 60,     /*!< DMA2 Stream 4 global Interrupt                                  */
-	OTG_FS_IRQn                = 67,     /*!< USB OTG FS global Interrupt                                     */
-	DMA2_Stream5_IRQn          = 68,     /*!< DMA2 Stream 5 global interrupt                                  */
-	DMA2_Stream6_IRQn          = 69,     /*!< DMA2 Stream 6 global interrupt                                  */
-	DMA2_Stream7_IRQn          = 70,     /*!< DMA2 Stream 7 global interrupt                                  */
+	DMA2_Stream0_IRQn          = 56,   /*!< DMA2 Stream 0 global Interrupt                                    */
+	DMA2_Stream1_IRQn          = 57,   /*!< DMA2 Stream 1 global Interrupt                                    */
+	DMA2_Stream2_IRQn          = 58,   /*!< DMA2 Stream 2 global Interrupt                                    */
+	DMA2_Stream3_IRQn          = 59,   /*!< DMA2 Stream 3 global Interrupt                                    */
+	DMA2_Stream4_IRQn          = 60,   /*!< DMA2 Stream 4 global Interrupt                                    */
+	OTG_FS_IRQn                = 67,   /*!< USB OTG FS global Interrupt                                       */
+	DMA2_Stream5_IRQn          = 68,   /*!< DMA2 Stream 5 global interrupt                                    */
+	DMA2_Stream6_IRQn          = 69,   /*!< DMA2 Stream 6 global interrupt                                    */
+	DMA2_Stream7_IRQn          = 70,   /*!< DMA2 Stream 7 global interrupt                                    */
 	USART6_IRQn                = 71,   /*!< USART6 global interrupt                                           */
 	I2C3_EV_IRQn               = 72,   /*!< I2C3 event interrupt                                              */
 	I2C3_ER_IRQn               = 73,   /*!< I2C3 error interrupt                                              */
-	FPU_IRQn                   = 81,     /*!< FPU global interrupt                                            */
+	FPU_IRQn                   = 81,   /*!< FPU global interrupt                                              */
 	SPI4_IRQn                  = 84,   /*!< SPI4 global Interrupt                                             */
 	SPI5_IRQn                  = 85    /*!< SPI5 global Interrupt                                             */
 } IRQn_e;
 
 
-/*
- * NVIC Priority numbers
+/**
+ * @brief NVIC Priority numbers
  */
 typedef enum
 {
@@ -343,7 +347,7 @@ typedef enum
 /***********************************************************
  *                   I2C
  ***********************************************************/
-/*
+/**
  * @brief Peripheral register definition structure for I2C
  */
 
@@ -365,7 +369,7 @@ typedef struct
 /***********************************************************
  *                   SPI
  ***********************************************************/
-/*
+/**
  * @brief Peripheral register definition structure for SPI
  */
 
@@ -383,7 +387,7 @@ typedef struct
 } SPI_RegDef_t;
 
 
-/*
+/**
  * @brief SPI CR1 register bit fields - anonymous enum usage
  */
 enum
@@ -405,7 +409,7 @@ enum
 };
 
 
-/*
+/**
  * @brief SPI CR2 register bit fields - anonymous enum usage
  */
 enum
@@ -420,7 +424,7 @@ enum
 };
 
 
-/*
+/**
  * @brief SPI SR register bit fields - anonymous enum usage
  */
 enum
@@ -437,8 +441,8 @@ enum
 };
 
 
-/*
- * SPIx Definition (Peripheral base addresses type casted to xxxRegDef_t)
+/**
+ * @brief SPIx Definition (Peripheral base addresses type casted to xxxRegDef_t)
  */
 #define SPI1                    ((SPI_RegDef_t *)SPI1_BASEADDR)
 #define SPI2                    ((SPI_RegDef_t *)SPI2_BASEADDR)
@@ -450,8 +454,8 @@ enum
 /***********************************************************
  *                   SYSCFG
  ***********************************************************/
-/*
- * Peripheral register definition structure for SYSCFG
+/**
+ * @brief Peripheral register definition structure for SYSCFG
  */
 typedef struct
 {
@@ -463,8 +467,8 @@ typedef struct
 } SYSCFG_RegDef_t;
 
 
-/*
- * EXTI Definition (Peripheral base addresses type casted to xxxRegDef_t)
+/**
+ * @brief EXTI Definition (Peripheral base addresses type casted to xxxRegDef_t)
  */
 #define SYSCFG                   ((SYSCFG_RegDef_t *)SYSCFG_BASEADDR)
 
@@ -474,8 +478,8 @@ typedef struct
  *                   USART
  ***********************************************************/
 /**
-  * @brief Peripheral register definition structure for USART
-  */
+ * @brief Peripheral register definition structure for USART
+ */
 
 typedef struct
 {
@@ -493,8 +497,8 @@ typedef struct
 /***********************************************************
  *                   Clock Enable Macros
  ***********************************************************/
-/*
- * Clock enable macros for GPIOx peripherals
+/**
+ * @brief Clock enable macros for GPIOx peripherals
  */
 #define GPIOA_PCLK_EN()         (RCC->AHB1ENR |= (1U << 0))
 #define GPIOB_PCLK_EN()         (RCC->AHB1ENR |= (1U << 1))
@@ -504,16 +508,16 @@ typedef struct
 #define GPIOH_PCLK_EN()         (RCC->AHB1ENR |= (1U << 7))
 
 
-/*
- * Clock enable macros for I2Cx peripherals
+/**
+ * @brief Clock enable macros for I2Cx peripherals
  */
 #define I2C1_PCLK_EN()         (RCC->APB1ENR |= (1U << 21))
 #define I2C2_PCLK_EN()         (RCC->APB1ENR |= (1U << 22))
 #define I2C3_PCLK_EN()         (RCC->APB1ENR |= (1U << 23))
 
 
-/*
- * Clock enable macros for SPIx peripherals
+/**
+ * @brief Clock enable macros for SPIx peripherals
  */
 #define SPI1_PCLK_EN()         (RCC->APB2ENR |= (1U << 12))
 #define SPI2_PCLK_EN()         (RCC->APB1ENR |= (1U << 14))
@@ -521,15 +525,15 @@ typedef struct
 #define SPI4_PCLK_EN()         (RCC->APB2ENR |= (1U << 13))
 #define SPI5_PCLK_EN()         (RCC->APB2ENR |= (1U << 20))
 
-/*
- * Clock enable macros for USARTx peripherals
+/**
+ * @brief Clock enable macros for USARTx peripherals
  */
 #define USART1_PCLK_EN()       (RCC->APB2ENR |= (1U << 4))
 #define USART2_PCLK_EN()       (RCC->APB1ENR |= (1U << 17))
 #define USART6_PCLK_EN()       (RCC->APB2ENR |= (1U << 5))
 
-/*
- * Clock enable macros for SYSCFG peripherals
+/**
+ * @brief Clock enable macros for SYSCFG peripherals
  */
 #define SYSCFG_PCLK_EN()       (RCC->APB2ENR |= (1U << 14))
 
@@ -538,8 +542,8 @@ typedef struct
 /***********************************************************
  *                   Clock Disable Macros
  ***********************************************************/
-/*
- * Clock disable macros for GPIOx peripherals
+/**
+ * @brief Clock disable macros for GPIOx peripherals
  */
 #define GPIOA_PCLK_DI()         (RCC->AHB1ENR &= ~(1U << 0))
 #define GPIOB_PCLK_DI()         (RCC->AHB1ENR &= ~(1U << 1))
@@ -549,16 +553,16 @@ typedef struct
 #define GPIOH_PCLK_DI()         (RCC->AHB1ENR &= ~(1U << 7))
 
 
-/*
- * Clock enable macros for I2Cx peripherals
+/**
+ * @brief Clock enable macros for I2Cx peripherals
  */
 #define I2C1_PCLK_DI()         (RCC->APB1ENR &= ~(1U << 21))
 #define I2C2_PCLK_DI()         (RCC->APB1ENR &= ~(1U << 22))
 #define I2C3_PCLK_DI()         (RCC->APB1ENR &= ~(1U << 23))
 
 
-/*
- * Clock enable macros for SPIx peripherals
+/**
+ * @brief Clock enable macros for SPIx peripherals
  */
 #define SPI1_PCLK_DI()         (RCC->APB2ENR &= ~(1U << 12))
 #define SPI2_PCLK_DI()         (RCC->APB1ENR &= ~(1U << 14))
@@ -566,30 +570,28 @@ typedef struct
 #define SPI4_PCLK_DI()         (RCC->APB2ENR &= ~(1U << 13))
 #define SPI5_PCLK_DI()         (RCC->APB2ENR &= ~(1U << 20))
 
-/*
- * Clock enable macros for USARTx peripherals
+/**
+ * @brief Clock enable macros for USARTx peripherals
  */
 #define USART1_PCLK_DI()       (RCC->APB2ENR &= ~(1U << 4))
 #define USART2_PCLK_DI()       (RCC->APB1ENR &= ~(1U << 17))
 #define USART6_PCLK_DI()       (RCC->APB2ENR &= ~(1U << 5))
 
-/*
- * Clock enable macros for SYSCFG peripherals
+/**
+ * @brief Clock enable macros for SYSCFG peripherals
  */
 #define SYSCFG_PCLK_DI()       (RCC->APB2ENR &= ~(1U << 14))
 
 
-/*
- * GPIO port macro - !!! CONVERT TO C FUNCTION LATER !!!
+/**
+ * @brief GPIO port macro - !!! CONVERT TO C FUNCTION LATER !!!
  */
 #define GPIO_BASEADDR_TO_CODE(x)   ((x == GPIOA) ? 0 : \
-		                            (x == GPIOB) ? 1 : \
-		                            (x == GPIOC) ? 2 : \
-		                            (x == GPIOD) ? 3 : \
-		                            (x == GPIOE) ? 4 : \
-		                            (x == GPIOH) ? 7 : 0)
-
-
+		                   (x == GPIOB) ? 1 : \
+		                   (x == GPIOC) ? 2 : \
+		                   (x == GPIOD) ? 3 : \
+		                   (x == GPIOE) ? 4 : \
+		                   (x == GPIOH) ? 7 : 0)
 
 
 
